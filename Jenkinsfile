@@ -8,6 +8,18 @@ pipeline {
              }      
         }
         
+        stage('Test Stage') {
+             steps {
+                 sh 'mvn test'
+             }      
+        }
+        
+        stage('Install Stage') {
+             steps {
+                 sh 'mvn clean install'
+             }      
+        }
+        
          stage('Package Stage') {
               steps {
                  sh 'mvn package'
