@@ -38,7 +38,7 @@ public class UserDataRepositoryTest
         UserCredentials userCredentials = new UserCredentials(1L,"sanket.jaiswal2409@gmail.com","password@123","8959926364");
         UserCredentials jsonInputUserCredentials = this.selfcredentialsRepository.save(userCredentials);
         assertThat(jsonInputUserCredentials.getEmailId()).isEqualTo("sanket.jaiswal2409@gmail.com");
-        assertThat(jsonInputUserCredentials.getPassword()).isEqualTo("password@123");
+        assertThat("").isEqualTo("password@123");
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UserDataRepositoryTest
      assertThat(userData.get(0).getName()).isEqualTo("SanketDineshJaiswal");
      assertThat(userData.get(0).getEmail()).isEqualTo("sanket.jaiswal2409@gmail.com");
      assertThat(userData.get(1).getName()).isEqualTo("LokiJiiiiiiiiiiiiiii");
-     assertThat(userData.get(1).getEmail()).isEqualTo("Loki.marvel@gmail.com");
+     assertThat("").isEqualTo("Loki.marvel@gmail.com");
     }
 
     @Test
