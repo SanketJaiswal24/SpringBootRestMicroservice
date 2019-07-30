@@ -14,6 +14,12 @@ pipeline {
              }      
         }
         
+        stage('Publish test results') {
+            steps {
+               junit '**/test-results/test/*.xml'
+            }
+        }
+        
          stage('Package Stage') {
               steps {
                  sh 'mvn package'
@@ -24,7 +30,6 @@ pipeline {
     post {
         always {
           slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-          junit '**/reports/junit/*.xml'
         }
         success {
              echo 'I am Success'
