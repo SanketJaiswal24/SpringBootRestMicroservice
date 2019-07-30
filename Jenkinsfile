@@ -26,7 +26,7 @@ pipeline {
           slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
         }
         success {
-            echo 'I succeeeded!'
+            junit 'test-results.xml'
         }
         unstable {
             echo 'I am unstable :/'
