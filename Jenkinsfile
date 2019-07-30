@@ -24,9 +24,10 @@ pipeline {
     post {
         always {
           slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          junit '**/reports/junit/*.xml'
         }
         success {
-            junit 'test-results.xml'
+             echo 'I am Success'
         }
         unstable {
             echo 'I am unstable :/'
