@@ -29,17 +29,16 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-        sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
+          sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
       
          stage('Push Docker Image'){
            steps
            {
-        withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-           sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
+            withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+            sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
          }
-        //   sh 'docker login -u sanketjaiswal12345 -p Hack@123@Dock'
            sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
            }
       }
@@ -53,25 +52,15 @@ pipeline {
         success {
             echo 'I am Success Done'
             
-            slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            
             junit 'target/**/*.xml'
             step([
               $class           : 'JacocoPublisher',
               execPattern      : 'target/jacoco.exec',
               sourcePattern    : '**/src/main/java'
            ])
+
+           slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             
-             sh "cat ${JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/log > log.txt"
-        
-             sh '''
-             curl \
-            -F token="xoxp-709486088868-712106001654-706589466929-6a34677ea555ba6fcd421d9bbec9d0f5" \
-            -F file=@${JENKINS_HOME}/workspace/TestPipeline/log.txt \
-            -F channels="builds" \
-            -F as_user=true \
-            https://slack.com/api/files.upload
-        '''    
         }
         
         unstable {
@@ -85,7 +74,6 @@ pipeline {
         changed {
             echo 'Things were different before...'
         }
-        
     }
 }
 
