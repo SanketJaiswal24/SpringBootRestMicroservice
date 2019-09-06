@@ -12,9 +12,6 @@ import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 @Entity
 @ApiModel(description="This Resource Model Delegate To UserData")
 public class UserData {
@@ -48,5 +45,85 @@ public class UserData {
 	@ApiModelProperty(notes = "User ProfilePicture")
     private String profilePicture;
 
+	public UserData() {
+		super();
+	}
+
+	public UserData(Long userId, String name, String contact, String email, String address, String dob, String gender,
+			String profilePicture) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.contact = contact;
+		this.email = email;
+		this.address = address;
+		this.dob = dob;
+		this.gender = gender;
+		this.profilePicture = profilePicture;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
+	}
 }
 

@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  web:
+    build: .
+    image: spring-boot-apache-derby-docker
+    ports:
+       - 80:3000
+    networks: 
+       - mynet
+
+  db:
+    image: postgres
+    networks: 
+       - mynet
+
+networks: 
+   mynet:

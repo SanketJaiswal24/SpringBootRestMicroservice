@@ -8,10 +8,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
 @ApiModel(description = "This Resource Model Delegate To HandleExcpetion Reponse")
 public class ExceptionResponse {
 
@@ -36,4 +32,32 @@ public class ExceptionResponse {
         this.message = message;
         errors = Arrays.asList(error);
     }
+	
+    public ExceptionResponse() {
+		super();
+	}
+	public HttpStatus getStatus() {
+		return status;
+	}
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public List<String> getErrors() {
+		return errors;
+	}
+	public void setErrors(List<String> errors) {
+		this.errors = errors;
+	}
+	@Override
+	public String toString() {
+		return "ExceptionResponse [status=" + status + ", message=" + message + ", errors=" + errors + "]";
+	}
+   
+    
 }

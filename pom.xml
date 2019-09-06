@@ -102,33 +102,6 @@
 		</license>
 	</licenses>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
-
-
-	<developers>
-		<developer>
-			<name>SanketJaiswal</name>
-			<email>sanket.jaiswal2409@gmail.com</email>
-			<organization>com.github</organization>
-			<organizationUrl>https://github.com/SanketJaiswal24/</organizationUrl>
-		</developer>
-	</developers>
-
-	<scm>
-		<connection>scm:git:git://github.com/SanketJaiswal24/SpringBootAPI.git</connection>
-		<developerConnection>scm:git:ssh://github.com/SanketJaiswal24/SpringBootAPI.git</developerConnection>
-		<url>https://github.com/SanketJaiswal24/SpringBootAPI</url>
-	</scm>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -148,6 +121,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- Spotify Plugin  -->
+			<plugin>
+				 <groupId>com.spotify</groupId>
+				 <artifactId>docker-maven-plugin</artifactId>
+				 <version>1.1.1</version>
+				 <configuration>
+					<imageName>spring-boot-apache-derby-docker</imageName>
+					<dockerDirectory>${basedir}</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -161,33 +153,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
-			</plugin>
 		</plugins>
+		<finalName>spring-boot-apache-derby-docker</finalName>
 	</build>
-
-
 </project>
