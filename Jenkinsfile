@@ -47,7 +47,7 @@ pipeline {
     }
     post {
         always {
-           
+           echo 'done job'
         }
         
         success {
