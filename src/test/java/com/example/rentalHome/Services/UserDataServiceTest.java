@@ -66,7 +66,7 @@ public class UserDataServiceTest
         UserData result = userDataService.createUser(userData);
         /*assertEquals(8L,result.getUserId());*/
         assertEquals("Sanket",result.getName());
-        assertEquals("sanket.jaiswalloky@gmail.com",result.getEmail());
+        assertEquals("sanket.jaiswal2409@gmail.com",result.getEmail());
     }
 
     @Test
