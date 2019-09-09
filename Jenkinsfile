@@ -20,17 +20,19 @@ pipeline {
            {
             withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
-         }
+           }
            sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
            }
       }
 
     stage('Run Container on Dev Server')
     {  
-      steps
-         {
-           sh 'docker run -p 8085:8085 spring-boot-apache-derby-docker2.0.0'
-         }
+        steps
+           {
+            withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+            sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
+           }
+          sh 'docker run -p 8085:8085 spring-boot-apache-derby-docker2.0.0'
      }
           
     }
