@@ -29,7 +29,7 @@ pipeline {
     {  
       steps
          {
-           sh 'dokcer run -p 8080:8080 -d -name my-app spring-boot-apache-derby-docker2.0.0'
+           sh 'dokcer run -p 9000:9000 -d -name my-app spring-boot-apache-derby-docker2.0.0'
          }
      }
           
