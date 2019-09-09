@@ -32,7 +32,6 @@ pipeline {
            sh 'dokcer run -p 8080:8080 -d -name my-app spring-boot-apache-derby-docker2.0.0'
          }
      }
-    }
           
     }
     post {
