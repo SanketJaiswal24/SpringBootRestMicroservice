@@ -23,7 +23,6 @@ pipeline {
            }
            sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
            }
-      }
 
     stage('Run Container on Dev Server')
     {  
