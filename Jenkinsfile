@@ -27,11 +27,9 @@ pipeline {
 
     stage('Run Container on Dev Server')
     {  
-       def dockerRun = 'dokcer run -p 8080:8080 -d -name my-app spring-boot-apache-derby-docker2.0.0'
       steps
          {
-           sshagent(['dev-server']) {
-           sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.39.108 ${dockerRun}"
+           sh 'dokcer run -p 8080:8080 -d -name my-app spring-boot-apache-derby-docker2.0.0'
          }
      }
     }
