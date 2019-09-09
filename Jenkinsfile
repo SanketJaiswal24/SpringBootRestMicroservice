@@ -32,11 +32,11 @@ pipeline {
             withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            }
-          sh 'docker run -p 8085:8085 spring-boot-apache-derby-docker2.0.0'
+          sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
        }
       }           
     }
-    
+
     post {
         always {
            echo 'done job'
