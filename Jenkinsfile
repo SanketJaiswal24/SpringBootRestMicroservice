@@ -2,12 +2,12 @@ pipeline {
   agent any
     stages {
       
-           stage('Test') {    
+           stage('Compile') {    
            agent {
         docker { image 'bibinwilson/jenkins-slave' }
             }      
              steps {
-                 sh 'mvn Test'
+                 sh 'mvn clean compile'
              }    
         }
         
