@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+  agent {
+        docker { image 'bibinwilson/jenkins-slave' }
+    } 
     stages {
         
         stage('Package Stage') {
