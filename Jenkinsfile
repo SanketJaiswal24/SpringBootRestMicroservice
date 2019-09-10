@@ -3,6 +3,14 @@ pipeline {
         docker { image 'bibinwilson/jenkins-slave' }
     } 
     stages {
+
+        stage('compile stage')
+        {
+          steps
+          {
+            sh 'mvn clean compile'
+          }
+        }
         
         stage('Package Stage') {
               steps {
@@ -27,7 +35,7 @@ pipeline {
            }
          }
 
-    stage('Run Container on Dev Server')
+   /*  stage('Run Container on Dev Server')
     {  
         steps
            {
@@ -36,7 +44,7 @@ pipeline {
            }
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
        }
-      }           
+      }       */     
     }
 
     post {
