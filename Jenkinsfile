@@ -10,7 +10,7 @@ pipeline {
              }    
         }
 
-        stage('Build Docker Image'){
+       /* stage('Build Docker Image'){
              steps
              {
           sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
@@ -36,7 +36,7 @@ pipeline {
            }
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
        }
-      }           
+      }  */         
     }
 
     post {
