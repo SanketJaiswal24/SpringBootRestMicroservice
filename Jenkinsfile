@@ -1,14 +1,25 @@
 pipeline {
-  agent {
-        docker { image 'bibinwilson/jenkins-slave' }
-    } 
+  
     stages {
         
-        stage('Package Stage') {
-              steps {
+        stage('Package Stage') {    
+           agent {
+        docker { image 'bibinwilson/jenkins-slave' }
+            }      
+             steps {
                  sh 'mvn package'
              }    
         }
+      
+        stage('clean install') {    
+           agent {
+        docker { image 'bibinwilson/jenkins-slave' }
+            }      
+             steps {
+                 sh 'mvn clean install'
+             }    
+        }
+        
 
        /* stage('Build Docker Image'){
              steps
