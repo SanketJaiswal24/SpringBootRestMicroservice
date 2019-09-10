@@ -1,26 +1,16 @@
 pipeline {
-  agent any
+  agent {
+        docker { image 'bibinwilson/jenkins-slave' }
+    } 
     stages {
-      
-           stage('Compile') {    
-           agent {
-        docker { image 'bibinwilson/jenkins-slave' }
-            }      
-             steps {
-                 sh 'mvn clean compile'
-             }    
-        }
         
-        stage('Package Stage') {    
-           agent {
-        docker { image 'bibinwilson/jenkins-slave' }
-            }      
-             steps {
+        stage('Package Stage') {
+              steps {
                  sh 'mvn package'
              }    
         }
-      
-       /* stage('Build Docker Image'){
+
+        stage('Build Docker Image'){
              steps
              {
           sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
@@ -46,7 +36,7 @@ pipeline {
            }
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
        }
-      }  */         
+      }           
     }
 
     post {
@@ -81,4 +71,5 @@ pipeline {
         }
     }
 }
+
 
