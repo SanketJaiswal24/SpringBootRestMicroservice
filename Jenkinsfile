@@ -1,7 +1,11 @@
 pipeline {
   
   agent {
-        docker { image 'sanketjaiswal12345/jenkins-docker-slave' }
+        docker 
+        { 
+          image 'sanketjaiswal12345/jenkins-docker-slave' 
+          args  '-v /var/run/docker.sock:/var/run/docker.sock'  
+        }
     }  
     
     stages {
