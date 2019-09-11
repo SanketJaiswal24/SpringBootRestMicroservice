@@ -3,6 +3,8 @@ pipeline {
  /*  agent {
         docker { image 'bibinwilson/jenkins-slave' }
     }  */
+
+    agent any
     
     stages {
 
