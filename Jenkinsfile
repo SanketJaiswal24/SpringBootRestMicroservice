@@ -1,7 +1,7 @@
 pipeline {
   
   agent {
-        docker { image 'sanketjaiswal12345/docker-container-slave' }
+        docker { image 'sanketjaiswal12345/docker-slave' }
     }  
     
     stages {
