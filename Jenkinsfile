@@ -41,7 +41,7 @@ pipeline {
        {  
          options 
          { 
-           timeout(time: 15, unit: 'SECOND') 
+           timeout(time: 20, unit: 'SECONDS') 
           }
         steps
            {
