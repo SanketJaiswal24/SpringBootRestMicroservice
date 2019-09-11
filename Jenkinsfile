@@ -1,7 +1,9 @@
 pipeline {
   
-  agent any 
-
+ /*  agent {
+        docker { image 'bibinwilson/jenkins-slave' }
+    }  */
+    
     stages {
 
         stage('Compile stage')
@@ -39,10 +41,11 @@ pipeline {
        /* Run Image in Dev Server*/
        stage('Run Container on Dev Server')
        {  
-         options 
-         { 
-           buildDiscarder(logRotator(numToKeepStr: '1')) 
+          options 
+          { 
+            timeout(time: 15, unit: 'SECONDS') 
           }
+        
         steps
            {
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
