@@ -27,6 +27,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
+             sh 'sudo usermod -aG docker jenkins'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
