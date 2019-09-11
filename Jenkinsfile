@@ -1,10 +1,10 @@
 pipeline {
-  agent {
-        docker { image 'bibinwilson/jenkins-slave' }
-    } 
+  
+  agent any 
+
     stages {
 
-        stage('compile stage')
+        stage('Compile stage')
         {
           steps
           {
@@ -18,14 +18,15 @@ pipeline {
              }    
         }
 
-/*         stage('Build Docker Image'){
+        stage('Build Docker Image'){
              steps
              {
           sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
-      
-         stage('Push Docker Image'){
+
+        /*Push Docker images in Docker-Hub */
+        stage('Push Docker Image'){
            steps
            {
             withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
@@ -35,26 +36,34 @@ pipeline {
            }
          }
 
-     stage('Run Container on Dev Server')
-    {  
+       /* Run Image in Dev Container */
+       stage('Run Container on Dev Server')
+       {  
         steps
            {
-            withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+            /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
-           }
+           } */
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
        }
-      }   */         
-    }
+      }           
 
+    }
+    
+    /*Post Decleration*/
     post {
+
         always {
-           echo 'done job'
+
+           echo 'Post action running'
+
         }
         
         success {
+            
             echo 'I am Success Done'
             
+            /*Publish Jacoca Report in Jenkins Dashboard */
             junit 'target/**/*.xml'
             step([
               $class           : 'JacocoPublisher',
@@ -62,21 +71,28 @@ pipeline {
               sourcePattern    : '**/src/main/java'
            ])
 
+           /* slack Notification */
            slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             
         }
         
         unstable {
+
             echo 'I am unstable :/'
+
         }
         
         failure {
+
+          /* slack Notification */
           slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+
         }
         
         changed {
             echo 'Things were different before...'
         }
+
     }
 }
 
