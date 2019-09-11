@@ -1,8 +1,8 @@
 pipeline {
   
- /*  agent {
+  agent {
         docker { image 'bibinwilson/jenkins-slave' }
-    }  */
+    }  
 
     agent any
     
@@ -25,7 +25,8 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-          sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
+             sh 'docker run -it -v /var/run/docker.sock:/var/run/docker.sock bibinwilson/jenkins-slave sh -c "apt-get update ; apt-get install docker.io -y ; bash"'
+             sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
 
