@@ -27,7 +27,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-             sh 'chmod 777 /var/run/docker.sock'
+             sh 'chmod 666 /var/run/docker.sock'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
