@@ -41,7 +41,7 @@ pipeline {
        {  
          options 
          { 
-           timeout(time: 20, unit: 'SECONDS') 
+           buildDiscarder(logRotator(numToKeepStr: '1')) 
           }
         steps
            {
