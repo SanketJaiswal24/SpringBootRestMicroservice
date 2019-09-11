@@ -36,14 +36,15 @@ pipeline {
            }
          }
 
-       /* Run Image in Dev Container */
+       /* Run Image in Dev Server*/
        stage('Run Container on Dev Server')
        {  
+         options 
+         { 
+           timeout(time: 1, unit: 'MINUTE') 
+          }
         steps
            {
-            /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-            sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
-           } */
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
        }
       }           
