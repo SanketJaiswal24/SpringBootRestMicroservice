@@ -27,7 +27,8 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-             sh 'sudo usermod -aG docker sanketjaiswa'
+             sh 'sudo groupadd docker'
+             sh 'sudo usermod -aG docker $sanketjaiswa'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
