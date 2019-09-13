@@ -28,6 +28,7 @@ pipeline {
              steps
              {
              sh 'java -version'
+             sh 'docker --version'
              sh 'ls'
              sh 'pwd'
              sh 'docker images'  
