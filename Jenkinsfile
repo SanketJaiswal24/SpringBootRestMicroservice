@@ -27,6 +27,9 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
+             sh 'mkdir DockerImages'
+             sh 'mv dockerfile DockerImages'
+             sh 'cd DockerImages'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
