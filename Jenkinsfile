@@ -27,6 +27,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
+             sh 'docker images'  
              sh 'mkdir DockerCon'
              sh 'mv /var/lib/jenkins/workspace/Devops-Demo/dockerfile DockerImages'
              sh 'cd DockerCon'
