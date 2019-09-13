@@ -27,6 +27,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
+             sh 'docker logs jekins-docker-slave'
              sh 'java -version'
              sh 'docker --version'
              sh 'ls'
