@@ -27,6 +27,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
+             sh 'curl -sSL https://get.docker.com/rootless | sh'
              sh 'docker logs jekins-docker-slave'
              sh 'java -version'
              sh 'docker --version'
