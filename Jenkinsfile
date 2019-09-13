@@ -27,9 +27,9 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-             sh 'mkdir DockerImages'
+             sh 'mkdir DockerCon'
              sh 'mv /var/lib/jenkins/workspace/Devops-Demo/dockerfile DockerImages'
-             sh 'cd DockerImages'
+             sh 'cd DockerCon'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
