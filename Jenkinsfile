@@ -4,7 +4,7 @@ pipeline {
         docker 
         { 
           image 'jekins-docker-slave' 
-          args  '--privileged'  
+          args  '--privileged -i'  
         }
     }  
     
