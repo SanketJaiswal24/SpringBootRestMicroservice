@@ -3,8 +3,8 @@ pipeline {
   agent {
         docker 
         { 
-          image 'sanketjaiswal12345/jenkins-docker-slave' 
-          args  '-v /var/run/docker.sock:/var/run/docker.sock'  
+          image 'jekins-docker-slave' 
+          args  '--privileged'  
         }
     }  
     
@@ -27,8 +27,6 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-               sh 'sudo usermod -aG docker $(whoami)'
-             sh 'sudo docker --version'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
