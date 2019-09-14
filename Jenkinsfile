@@ -4,7 +4,7 @@ pipeline {
         docker 
         { 
           image 'jekins-docker-slave' 
-          args  '--privileged -i'  
+          args  '-it -v /var/run/docker.sock:/var/run/docker.sock ubuntu:latest sh -c "apt-get update ; apt-get install docker.io -y ; bash"'  
         }
     }  
     
@@ -27,8 +27,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-             sh 'curl -sSL https://get.docker.com/rootless | sh'
-             sh 'docker logs jekins-docker-slave'
+             sh 'docker images'
              sh 'java -version'
              sh 'docker --version'
              sh 'ls'
