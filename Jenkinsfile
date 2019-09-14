@@ -4,7 +4,7 @@ pipeline {
         docker 
         { 
           image 'jekins-docker-slave' 
-          args  '-it -v /var/run/docker.sock:/var/run/docker.sock ubuntu:latest sh -c "apt-get update ; apt-get install docker.io -y ; bash"'  
+          args  '-v /var/run/docker.sock:/var/run/docker.sock ubuntu:latest sh -c "apt-get update ; apt-get install docker.io -y ; bash"'  
         }
     }  
     
