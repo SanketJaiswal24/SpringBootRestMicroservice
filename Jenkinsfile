@@ -3,7 +3,8 @@ pipeline {
   agent {
         docker 
         { 
-          image 'docker'   
+          image 'docker' 
+          args  '--privileged'  
         }
     }  
     
