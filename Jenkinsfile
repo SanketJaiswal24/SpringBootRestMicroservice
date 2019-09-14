@@ -3,8 +3,7 @@ pipeline {
   agent {
         docker 
         { 
-          image 'jekins-docker-slave' 
-          args  '-v /var/run/docker.sock:/var/run/docker.sock jekins-docker-slave sh -c "apt-get update ; apt-get install docker.io -y ; bash"'  
+          image 'docker'   
         }
     }  
     
@@ -14,6 +13,7 @@ pipeline {
         {
           steps
           {
+            sh 'docker images'
             sh 'mvn clean compile'
           }
         }
