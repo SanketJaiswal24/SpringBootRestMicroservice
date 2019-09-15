@@ -36,9 +36,9 @@ pipeline {
         stage('Push Docker Image'){
            steps
            {
+             sh 'chown $USER:jenkins /var/lib/jenkins/workspace/Devops-Demo'
              withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-            /* sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}" */
-            sh "docker login"
+            sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            } 
            sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
            }
