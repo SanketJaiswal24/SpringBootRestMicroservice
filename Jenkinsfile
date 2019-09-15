@@ -36,8 +36,8 @@ pipeline {
         stage('Push Docker Image'){
            steps
            {
-             sh 'docker images'
-             sh 'pwd'
+             sh 'mkdir docker'
+             sh 'chown $USER:docker ./docker'
             /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            } */
