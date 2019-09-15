@@ -28,16 +28,6 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
-             sh 'sudo usermod -a -G docker $USER'
-             sh 'docker images'
-             sh 'java -version'
-             sh 'docker --version'
-             sh 'ls'
-             sh 'pwd'
-             sh 'docker images'  
-             sh 'mkdir DockerCon'
-             sh 'mv /var/lib/jenkins/workspace/Devops-Demo/dockerfile DockerImages'
-             sh 'cd DockerCon'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
