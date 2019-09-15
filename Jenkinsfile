@@ -3,34 +3,36 @@ pipeline {
   agent {
         docker 
         { 
-          image 'sanketjaiswal12345/final-slave-dcoker' 
+          image 'jekins-docker-slave' 
           args  '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  
         }
     }  
     
     stages {
-
         stage('Compile stage')
         {
           steps
           {
-            sh 'docker images'
             sh 'mvn clean compile'
           }
         }
         
-        stage('Package Stage') {
-              steps {
+        stage('Package Stage') 
+        {
+            steps 
+            {
                  sh 'mvn package'
-             }    
+            }    
         }
 
-        stage('Build Docker Image'){
+        stage('Build Docker Image')
+        {
              steps
              {
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
+
         /*Push Docker images in Docker-Hub */
         stage('Push Docker Images'){
            steps
@@ -50,7 +52,6 @@ pipeline {
           { 
             timeout(time: 15, unit: 'SECONDS') 
           }
-        
         steps
            {
           sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
