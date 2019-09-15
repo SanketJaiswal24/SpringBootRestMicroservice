@@ -37,12 +37,9 @@ pipeline {
            steps
            {
              withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-            sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
-            sh  'chown $USER:jenkins ~/.docker'
-            sh  'chown $USER:jenkins ~/.docker/config.json'
-            sh  'chmod g+rw ~/.docker/config.json'
+            sh "sudo docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            } 
-           sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
+           sh 'sudo docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
            }
          }
 
