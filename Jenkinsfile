@@ -14,6 +14,9 @@ pipeline {
         {
           steps
           {
+            sh 'apt-get update'
+            sh 'apt-get install -qy openjdk-8-jdk'
+            sh 'apt-get install -qy maven'
             sh 'docker images'
             sh 'mvn clean compile'
           }
