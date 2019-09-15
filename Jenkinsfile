@@ -37,7 +37,7 @@ pipeline {
            steps
            {
              sh 'mkdir docker'
-             sh 'chown $USER:docker ./docker'
+             sh 'sudo chown $USER:root ./docker'
             /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            } */
