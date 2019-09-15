@@ -36,6 +36,9 @@ pipeline {
         stage('Push Docker Image'){
            steps
            {
+             sh  'chown $USER:jenkins ~/.docker'
+             sh  'chown $USER:jenkins ~/.docker/config.json'
+             sh  'chmod g+rw ~/.docker/config.json'
              withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            } 
