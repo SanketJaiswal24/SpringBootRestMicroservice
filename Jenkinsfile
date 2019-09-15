@@ -31,9 +31,8 @@ pipeline {
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
-
         /*Push Docker images in Docker-Hub */
-        stage('Push Docker Image'){
+        stage('Push Docker Images'){
            steps
            {
              sh 'chown $USER:jenkins /var/lib/jenkins/workspace/Devops-Demo'
