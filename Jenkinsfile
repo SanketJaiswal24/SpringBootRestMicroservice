@@ -3,7 +3,7 @@ pipeline {
   agent {
         docker 
         { 
-          image 'bibinwilson/jenkins-slave' 
+          image 'jekins-docker-slave' 
           args  '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  
         }
     }  
