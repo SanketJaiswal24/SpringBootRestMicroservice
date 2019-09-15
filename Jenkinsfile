@@ -28,6 +28,7 @@ pipeline {
         stage('Build Docker Image'){
              steps
              {
+             sh 'sudo usermod -a -G docker $USER'
              sh 'docker images'
              sh 'java -version'
              sh 'docker --version'
