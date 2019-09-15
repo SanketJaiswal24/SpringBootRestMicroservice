@@ -3,7 +3,7 @@ pipeline {
   agent {
         docker 
         { 
-          image 'docker' 
+          image 'bibinwilson/jenkins-slave' 
           args  '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  
         }
     }  
@@ -14,9 +14,6 @@ pipeline {
         {
           steps
           {
-            sh 'apt-get update'
-            sh 'apt-get install -qy openjdk-8-jdk'
-            sh 'apt-get install -qy maven'
             sh 'docker images'
             sh 'mvn clean compile'
           }
