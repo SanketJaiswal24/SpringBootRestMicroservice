@@ -4,7 +4,7 @@ pipeline {
         docker 
         { 
           image 'docker' 
-          args  '--privileged'  
+          args  '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  
         }
     }  
     
