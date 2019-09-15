@@ -36,9 +36,9 @@ pipeline {
         stage('Push Docker Image'){
            steps
            {
-            sh 'chown $USER:docker ~/.docker'
-            sh 'chown $USER:docker ~/.docker/config.json'
-            sh 'chmod g+rw ~/.docker/config.json'
+            sh 'chown $USER:docker /var/run/docker'
+            sh 'chown $USER:docker /var/run/docker/config.json'
+            sh 'chmod g+rw /var/run/docker/config.json'
             withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            }
