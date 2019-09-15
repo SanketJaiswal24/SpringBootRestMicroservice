@@ -36,7 +36,7 @@ pipeline {
         stage('Push Docker Image'){
            steps
            {
-            sh 'sudo apt install gnupg2 pass'
+            sh 'apt install gnupg2 pass'
             withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            }
