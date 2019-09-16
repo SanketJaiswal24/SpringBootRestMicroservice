@@ -37,7 +37,8 @@ pipeline {
         stage('Push Docker Images'){
            steps
            {
-             /* sh 'chown -R jenkins:jenkins /var/lib/jenkins/workspace/Devops-Demo2' */
+              sh 'sudo chmod 777 /var/lib/jenkins/workspace/Devops-Demo2'
+              sh 'sudo chmod 400 /var/lib/jenkins/workspace/Devops-Demo2'
              withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            } 
