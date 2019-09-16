@@ -38,7 +38,6 @@ pipeline {
            steps
            {
               sh 'chmod 777 /var/lib/jenkins/workspace/Devops-Demo3'
-              sh 'pass init /home/.docker'
              /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            }  */
