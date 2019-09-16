@@ -22,7 +22,7 @@ pipeline {
             steps 
             {
                  sh 'mvn package'
-            }    Coverity in docker container
+            }   
         }
 
         stage('Build Docker Image')
