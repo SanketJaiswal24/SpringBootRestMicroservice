@@ -42,7 +42,7 @@ pipeline {
          }
 
        /* Run Image in Dev Server*/
-       stage('Run Container on Dev Server')
+    /*    stage('Run Container on Dev Server')
        {  
           options 
           { 
@@ -52,7 +52,7 @@ pipeline {
            {
           sh 'docker run -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0'
        }
-      }           
+      }  */          
 
     }
     
