@@ -40,7 +40,7 @@ pipeline {
              /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
             sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
            }  */
-           sh 'docker login -u sanketjaiswal12345 -p Hack@123@Dock'
+           sh 'sudo docker login -u sanketjaiswal12345 -p Hack@123@Dock'
            sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
            }
          }
