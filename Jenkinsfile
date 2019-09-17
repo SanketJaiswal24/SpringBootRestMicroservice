@@ -29,6 +29,7 @@ pipeline {
         {
              steps
              {
+             sh 'apt-get install gnupg-agent'
              sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
