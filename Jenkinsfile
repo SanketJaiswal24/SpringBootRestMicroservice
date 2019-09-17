@@ -29,7 +29,7 @@ pipeline {
         {
              steps
              {
-             sh 'docker build -t sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0 .'
+             sh 'docker build -t localhost:5000/spring-boot-apache-derby-docker2.0.0 .'
              }
         }
 
