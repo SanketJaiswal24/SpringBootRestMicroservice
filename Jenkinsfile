@@ -37,11 +37,7 @@ pipeline {
         stage('Push Docker Images'){
            steps
            {
-             /* withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-            sh "docker login -u sanketjaiswal12345 -p ${dockerHubPwd}"
-           }  */
-           sh 'sudo docker login -u sanketjaiswal12345 -p Hack@123@Dock'
-           sh 'docker push sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
+           sh 'docker push localhost:5000/spring-boot-apache-derby-docker2.0.0'
            }
          }
 
@@ -54,7 +50,7 @@ pipeline {
           }
         steps
            {
-          sh 'docker run -p 8085:8085 sanketjaiswal12345/spring-boot-apache-derby-docker2.0.0'
+          sh 'docker run -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0'
        }
       }           
 
