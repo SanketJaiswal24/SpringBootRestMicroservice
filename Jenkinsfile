@@ -78,7 +78,8 @@ pipeline {
            ])
 
            /* slack Notification */
-           slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+           //slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+           slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'good', message: 'Slack Jenkins', tokenCredentialId: 'slack-integration'
             
         }
         
@@ -91,8 +92,8 @@ pipeline {
         failure {
 
           /* slack Notification */
-          slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-
+          //slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'bad', message: 'Slack Jenkins', tokenCredentialId: 'slack-integration'
         }
         
         changed {
