@@ -61,13 +61,13 @@ pipeline {
          }
 
        /* Run Image in Dev Server*/
-        stage('Run Container on Dev Server')
+        /* stage('Run Container on Dev Server')
        {  
         steps
            {
           sh "docker run -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}"
        }
-      }            
+      }         */    
 
     }
   
@@ -98,13 +98,14 @@ pipeline {
         failure {
 
           /*slack Notification Incomming Webhook*/
-          slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'bad', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
+          slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'bad', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
        
         }
         
         changed {
-
-            echo 'Things were different before...'
+           
+            /*slack Notification Incomming Webhook*/
+          slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'bad', message: "ABORTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
 
         }
 
