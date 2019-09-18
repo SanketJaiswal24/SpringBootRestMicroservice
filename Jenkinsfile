@@ -103,10 +103,7 @@ pipeline {
         }
         
         changed {
-           
-            /*slack Notification Incomming Webhook*/
-          slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'bad', message: "ABORTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
-
+          echo 'I am changed :/'
         }
 
     }
