@@ -46,17 +46,31 @@ pipeline {
            }
          }
 
+         stage('Publish Jacoca')
+         {
+           steps
+           {
+              /*Publish Jacoca Report in Jenkins Dashboard */
+            junit 'target/**/*.xml'
+            step([
+              $class           : 'JacocoPublisher',
+              execPattern      : 'target/jacoco.exec',
+              sourcePattern    : '**/src/main/java'
+           ])
+           }
+         }
+
        /* Run Image in Dev Server*/
-        stage('Run Container on Dev Server')
+       /*  stage('Run Container on Dev Server')
        {  
         steps
            {
-          sh 'docker run -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0'
+          sh "docker run -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}"
        }
-      }            
+      }       */      
 
     }
-    
+  
     /*Post Decleration*/
     post {
 
@@ -70,14 +84,6 @@ pipeline {
             
             echo 'I am Success Done'
             
-            /*Publish Jacoca Report in Jenkins Dashboard */
-            junit 'target/**/*.xml'
-            step([
-              $class           : 'JacocoPublisher',
-              execPattern      : 'target/jacoco.exec',
-              sourcePattern    : '**/src/main/java'
-           ])
-
            /*slack Notification Incomming Webhook*/
            slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'good', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
             
