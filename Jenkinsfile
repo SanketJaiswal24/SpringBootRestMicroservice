@@ -20,6 +20,17 @@ pipeline {
           }
         }
 
+        stage('SonarQube Check')
+        {
+          steps
+          {
+            withSonarQubeEnv ('Sonar')
+            {
+              sh 'mvn sonar:sonar   -Dsonar.host.url=http://localhost:9000   -Dsonar.login=b898832120c088619205a7fc9bd221c92b1cde86'
+            }
+          }
+        }
+
         /*Package stage*/  
         stage('Package Stage') 
         {
@@ -38,7 +49,7 @@ pipeline {
              }
         }
 
-        /*Push Docker images in Private-Docker-Registry */
+        /*Push Docker images in Local-Docker-Registry */
         stage('Push Docker Image'){
            steps
            {
