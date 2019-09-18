@@ -39,14 +39,14 @@ pipeline {
         }
 
         /*Push Docker images in Private-Docker-Registry */
-        stage('Push Docker Images'){
+        stage('Push Docker Image'){
            steps
            {
            sh "docker push localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}"
            }
          }
 
-         stage('Publish Jacoca')
+         stage('Publish Jacoca Report')
          {
            steps
            {
