@@ -1,16 +1,20 @@
 pipeline {
-  
   /*Jenkins Slave is Docker Container*/
-  agent {
-        docker 
-        { 
-          image 'sanketjaiswal12345/new-slaves-master2' 
-          args  '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  
-        }
-    }  
-
+  agent any
+    tools { 
+           maven 'maven-3.3.9' 
+           jdk 'java' 
+     } 
+//  agent {
+//         // docker 
+//         // { 
+//         //   image 'sanketjaiswal12345/new-slaves-master2'  
+//         //   args  '--privileged -v /var/run/docker.sock:/var/run/docker.sock '  
+//         // }
+//     }  
+    
     stages {
-
+  
         /*Compile stage*/
         stage('Compile stage')
         {
@@ -20,17 +24,6 @@ pipeline {
           }
         }
 
-       stage('SonarQube Check')
-        {
-          steps
-          {
-            withSonarQubeEnv ('Sonar')
-            {
-              sh 'mvn sonar:sonar -Dsonar.projectKey=devops-demo -Dsonar.host.url=http://localhost:9000 -Dsonar.login=2c6d7ae3a260791ea85d63dca84e1fb8dd2310cd'
-            }
-          }
-        } 
-
         /*Package stage*/  
         stage('Package Stage') 
         {
@@ -39,13 +32,14 @@ pipeline {
            sh 'mvn package'
             }   
         }
-        
+      
         /*Build Dcoker Image*/ 
         stage('Build Docker Image')
         {
              steps
              {
-           sh "docker build -t localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER} ."
+               sh 'pwd'
+          /*  sh "docker build -t localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER} ." */
              }
         }
 
@@ -53,7 +47,8 @@ pipeline {
         stage('Push Docker Image'){
            steps
            {
-           sh "docker push localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}"
+             sh 'pwd'
+           /* sh "docker push localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}" */
            }
          }
 
@@ -61,6 +56,7 @@ pipeline {
          {
            steps
            {
+             sh 'mvn clean test jacoco:report'
               /*Publish Jacoca Report in Jenkins Dashboard */
             junit 'target/**/*.xml'
             step([
@@ -72,52 +68,30 @@ pipeline {
          }
 
        /* Run Image in Dev Server*/
-        /* stage('Run Container on Dev Server')
+       stage('Run Container on Dev Server')
        {  
         steps
            {
-          sh "docker run -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}"
+            sh 'pwd'
+          /*sh "docker run -d -p 8085:8085 localhost:5000/spring-boot-apache-derby-docker2.0.0${env.BUILD_NUMBER}"*/
        }
-      }         */    
-
-    }
-  
+      }     
+  }
     /*Post Decleration*/
     post {
 
         always {
-
            echo 'Post action running'
-
-        }
+          //  sh 'find ${WORKSPACE} -type f -print '
+         }
         
         success {
             
             echo 'I am Success Done'
             
            /*slack Notification Incomming Webhook*/
-           slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'good', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
+          //  slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'good', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
             
         }
-        
-        unstable {
-
-            echo 'I am unstable :/'
-
-        }
-        
-        failure {
-
-          /*slack Notification Incomming Webhook*/
-          slackSend baseUrl: 'https://hooks.slack.com/services/', channel: 'build', color: 'bad', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", tokenCredentialId: 'slack-integration'
-       
-        }
-        
-        changed {
-          echo 'I am changed :/'
-        }
-
     }
 }
-
-
