@@ -19,7 +19,7 @@ public class AspectCongfig {
     @Order(1)
     public void logJoinPoint(JoinPoint joinPoint)
     {
-        log.info("Join point kind is very  : " + joinPoint.getKind());
+        log.info("Join point : " + joinPoint.getKind());
         log.info("Signature declaring type : "+ joinPoint.getSignature().getDeclaringTypeName());
         log.info("Signature name : " + joinPoint.getSignature().getName());
         log.info("Arguments : " + Arrays.toString(joinPoint.getArgs()));
