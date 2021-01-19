@@ -28,7 +28,7 @@ public class UserDataRepositoryTest
         UserData user = new UserData(1L,"SanketDineshJaiswal","8959926364","sanket.jaiswal2409@gmail.com","118 Bhagat Singh Marge Sawer Road","2018-03-19","M","pic-name");
         UserData userData = this.userDataRepository.save(user);
         assertThat(userData.getEmail()).isEqualTo("sanket.jaiswal2409@gmail.com");
-        assertThat(userData.getUserId()).isEqualTo(1);
+        assertThat(userData.getUserId()).isEqualTo(1)
         assertThat(userData.getContact()).isEqualTo("8959926364");
     }
 
